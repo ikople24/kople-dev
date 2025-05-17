@@ -1,114 +1,153 @@
 import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Lightbulb, ShieldCheck, GaugeCircle } from "lucide-react";
+import { TypeAnimation } from 'react-type-animation';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export default function Home() {
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              pages/index.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen bg-[#282a36] text-[#f8f8f2]">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center bg-[#44475a] text-[#f8f8f2] px-6 py-12 overflow-hidden" id="home">
+        <div className="relative z-10 w-full px-6 lg:px-20 flex flex-col lg:flex-row items-center justify-between gap-12 p-10 rounded-lg">
+
+          {/* Left Side Content */}
+          <div className="max-w-xl">
+            <div className="animated-headline">
+              <TypeAnimation
+                sequence={[
+                  'เทคโนโลยีขับเคลื่อนอนาคต',
+                  1000,
+                  'เทคโนโลยีสุดล้ำสมัย',
+                  1000,
+                  'ด้วยเทคโนโลยี AI',
+                  1000,
+                ]}
+                wrapper="h1"
+                repeat={Infinity}
+                className="text-4xl md:text-5xl font-bold leading-tight mb-6 pr-4 break-words whitespace-normal"
+                preRenderFirstString={true}
+                speed={50}
+              />
+            </div>
+            <p className="mb-8 text-lg animate-fade-in-up delay-200 transition-opacity duration-1000">
+              ยกระดับธุรกิจของคุณด้วยโซลูชันเทคโนโลยีล้ำสมัยที่ออกแบบมาเพื่อเพิ่มประสิทธิภาพและสร้างการเติบโต
+            </p>
+            <div className="flex gap-4">
+              <button className="btn btn-success" onClick={() => scrollTo("contact")}>ดูสินค้าของเรา</button>
+              <button
+                className="btn btn-outline btn-success hover:bg-success hover:text-black transition duration-300"
+                onClick={() => scrollTo('contact')}
+              >
+                ติดต่อเรา
+              </button>
+            </div>
+          </div>
+
+          {/* Responsive Large Text */}
+          <div className="absolute inset-0 flex flex-col-reverse lg:flex-row justify-end items-center lg:items-center pr-4 lg:pr-10 mt-24 lg:mt-0 pointer-events-none">
+            <div className="text-[64px] lg:text-[120px] font-bold text-[#50fa7b]/20 select-none transition duration-500 ease-in-out hover:animate-pulse">
+              <span>KOPLE-DEV</span>
+            </div>
+          </div>
+
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+      </section>
+
+      {/* Why Us Section */}
+      <section className="py-20 flex items-center bg-[#282a36]" id="why">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-12 text-[#f8f8f2]">ทำไมต้องเลือก KOPLE DEV?</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="card shadow p-6 bg-[#44475a] text-[#f8f8f2]">
+              <Lightbulb className="w-8 h-8 text-[#bd93f9] mb-3 mx-auto" />
+              <h3 className="font-bold mb-2">นวัตกรรมล้ำสมัย</h3>
+              <p>เรานำเทคโนโลยีล่าสุดมาพัฒนาโซลูชันที่ตอบโจทย์</p>
+            </div>
+            <div className="card shadow p-6 bg-[#44475a] text-[#f8f8f2]">
+              <ShieldCheck className="w-8 h-8 text-[#bd93f9] mb-3 mx-auto" />
+              <h3 className="font-bold mb-2">ความปลอดภัยสูงสุด</h3>
+              <p>ระบบออกแบบโดยคำนึงถึงความปลอดภัยของข้อมูล</p>
+            </div>
+            <div className="card shadow p-6 bg-[#44475a] text-[#f8f8f2]">
+              <GaugeCircle className="w-8 h-8 text-[#bd93f9] mb-3 mx-auto" />
+              <h3 className="font-bold mb-2">ประสิทธิภาพสูง</h3>
+              <p>ลดต้นทุน เพิ่มประสิทธิภาพการทำงานระยะยาว</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-20 bg-[#282a36] text-center text-[#f8f8f2]" id="services">
+        <h2 className="text-3xl font-bold mb-6">สินค้าและบริการ</h2>
+        <p className="max-w-xl mx-auto">เราพัฒนาโซลูชันเทคโนโลยี AI และฐานข้อมูลเพื่อรองรับธุรกิจทุกขนาด</p>
+      </section>
+
+      {/* About Section */}
+      <section className="py-20 bg-[#282a36] text-[#f8f8f2]" id="about">
+        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12">
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="https://res.cloudinary.com/dczmhfvgh/image/upload/v1747504680/unnamed_wnxhab.jpg"
+            alt="about"
+            width={400}
+            height={400}
+            className="rounded-full object-cover shadow-lg ring-4 ring-[#44475a]/40 transition duration-300 hover:brightness-110 hover:contrast-125 hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.25)]"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+          <div>
+            <h2 className="text-3xl font-bold mb-4">เกี่ยวกับ KOPLE DEV</h2>
+            <p className="mb-6">
+              บริษัทเทคโนโลยีชั้นนำ มุ่งพัฒนาโซลูชัน AI และฐานข้อมูลล้ำสมัยให้ลูกค้าสามารถใช้ได้อย่างเต็มประสิทธิภาพ
+            </p>
+            <button className="btn btn-success mr-4" onClick={() => scrollTo("contact")}>ติดต่อเรา</button>
+            <button className="btn btn-outline btn-success">ดูสินค้า</button>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="py-20 bg-[#282a36]" id="contact">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#f8f8f2]">ติดต่อเรา</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="card p-6 bg-white shadow-md text-black">
+              <h3 className="font-bold text-lg mb-4">ส่งข้อความถึงเรา</h3>
+              <form className="space-y-4">
+                <select defaultValue="" className="select select-bordered bg-[#44475a] text-[#f8f8f2] w-full">
+                  <option value="" disabled>เลือกบริการที่สนใจ</option>
+                  <option>ซื้อโดเมน</option>
+                  <option>เช่าพื้นที่คลาวด์</option>
+                  <option>ออกแบบเว็บไซต์</option>
+                  <option>ออกแบบฐานข้อมูล</option>
+                  <option>UX/UI</option>
+                  <option>เช่าซื้อระบบ Smart-Apps</option>
+                </select>
+                <input type="text" placeholder="ชื่อ - นามสกุล" className="input input-bordered bg-[#44475a] text-[#f8f8f2] w-full" />
+                <input type="email" placeholder="อีเมล" className="input input-bordered bg-[#44475a] text-[#f8f8f2] w-full" />
+                <input type="text" placeholder="เบอร์โทรศัพท์" className="input input-bordered bg-[#44475a] text-[#f8f8f2] w-full" />
+                <textarea className="textarea textarea-bordered bg-[#44475a] text-[#f8f8f2] w-full" placeholder="ข้อความ"></textarea>
+                <button className="btn btn-success w-full">ส่งข้อความ</button>
+              </form>
+            </div>
+            <div className="card p-6 bg-white shadow-md text-black">
+              <h3 className="font-bold text-lg mb-4">ข้อมูลติดต่อ</h3>
+              <p>📍 ที่อยู่: 79 ถ.เจ้าเงาะ ต.ตาคลี อ.ตาคลี จ.นครสวรรค์ 60140</p>
+              <p>📞 โทร: 090-6877773</p>
+              <p>📧 อีเมล: boldnessking26@gmail.com</p>
+              <p>🕘 เวลาเปิดทำการ: จันทร์ - ศุกร์ 09:00 - 18:00 น.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#44475a] text-[#f8f8f2] p-6 text-center">
+        <p>&copy; 2025 KOPLE-DEV. สงวนลิขสิทธิ์ทั้งหมด</p>
       </footer>
     </div>
   );
