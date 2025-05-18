@@ -1,14 +1,58 @@
 import Image from "next/image";
 import { Lightbulb, ShieldCheck, GaugeCircle } from "lucide-react";
 import { TypeAnimation } from 'react-type-animation';
+import { useState } from "react";
 
 
 export default function Home() {
+
+  const [selectedService, setSelectedService] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [message, setMessage] = useState('');
+
+  const formData = {
+    service: selectedService,
+    name,
+    email,
+    phone,
+    message,
+  };
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const formData = {
+    service: selectedService,
+    name,
+    email,
+    phone,
+    message,
+  };
+
+  try {
+    const res = await fetch("/api/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    if (res.ok) {
+      alert("ส่งข้อมูลสำเร็จผ่าน n8n");
+    } else {
+      alert("เกิดข้อผิดพลาด");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("ไม่สามารถเชื่อมต่อ webhook");
+  }
+};
 
   return (
     <div className="min-h-screen bg-[#282a36] text-[#f8f8f2]">
@@ -118,7 +162,7 @@ export default function Home() {
             <div className="card p-6 bg-white shadow-md text-black">
               <h3 className="font-bold text-lg mb-4">ส่งข้อความถึงเรา</h3>
               <form className="space-y-4">
-                <select defaultValue="" className="select select-bordered bg-[#44475a] text-[#f8f8f2] w-full">
+                <select value={selectedService} onChange={(e) => setSelectedService(e.target.value)} className="select select-bordered bg-[#44475a] text-[#f8f8f2] w-full">
                   <option value="" disabled>เลือกบริการที่สนใจ</option>
                   <option>ซื้อโดเมน</option>
                   <option>เช่าพื้นที่คลาวด์</option>
@@ -127,11 +171,11 @@ export default function Home() {
                   <option>UX/UI</option>
                   <option>เช่าซื้อระบบ Smart-Apps</option>
                 </select>
-                <input type="text" placeholder="ชื่อ - นามสกุล" className="input input-bordered bg-[#44475a] text-[#f8f8f2] w-full" />
-                <input type="email" placeholder="อีเมล" className="input input-bordered bg-[#44475a] text-[#f8f8f2] w-full" />
-                <input type="text" placeholder="เบอร์โทรศัพท์" className="input input-bordered bg-[#44475a] text-[#f8f8f2] w-full" />
-                <textarea className="textarea textarea-bordered bg-[#44475a] text-[#f8f8f2] w-full" placeholder="ข้อความ"></textarea>
-                <button className="btn btn-success w-full">ส่งข้อความ</button>
+                <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="ชื่อ - นามสกุล" className="input input-bordered bg-[#44475a] text-[#f8f8f2] w-full" />
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="อีเมล" className="input input-bordered bg-[#44475a] text-[#f8f8f2] w-full" />
+                <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="เบอร์โทรศัพท์" className="input input-bordered bg-[#44475a] text-[#f8f8f2] w-full" />
+                <textarea value={message} onChange={(e) => setMessage(e.target.value)} className="textarea textarea-bordered bg-[#44475a] text-[#f8f8f2] w-full" placeholder="ข้อความ"></textarea>
+                <button type="submit" onClick={handleSubmit} className="btn btn-success w-full">ส่งข้อความ</button>
               </form>
             </div>
             <div className="card p-6 bg-white shadow-md text-black">
