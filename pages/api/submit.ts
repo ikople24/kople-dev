@@ -7,7 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const webhookURL = 'https://your-n8n-host/webhook/form-submit' // 👈 ใช้ webhook จาก n8n
+    const webhookURL = 'https://primary-production-a1769.up.railway.app/webhook/contact-form' // 👈 ใช้ webhook จาก n8n
     const response = await fetch(webhookURL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
